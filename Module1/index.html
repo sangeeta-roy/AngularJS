@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" dir="ltr" ng-app="LunchCheck">
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>Lunch Checker</title>
+  </head>
+<body ng-controller="LunchCheckController">
+   <div class="container">
+     <h1>Lunch Checker Application</h1>
+          <div class="form-group">
+            Enter Lunch Items:
+             <input id="lunch-menu" type="text"
+             placeholder="list comma separated lunch dishes"
+             class="form-control"
+             ng-model="lunchMenu">
+          </div>
+         <div class="form-group">
+             <button class="btn btn-default" ng-click="CheckLunchMenu()">Check If Too Much</button>
+             <p>Number of Lunch items: {{LunchItemsSum}}</p>
+         </div>
+         <div class="form-group message">
+           {{message}}
+           <!-- Your message can go here. -->
+         </div>
+   </div>
+ </body>
+</html>
