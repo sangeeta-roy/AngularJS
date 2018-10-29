@@ -13,7 +13,13 @@ function Config(ShoppingListProvider) {
   ShoppingListProvider.defaults.message = false;
   ShoppingListProvider.defaults.items = [];
   var item={
-    name: "carrots",
+    name: "Cookies",
+    quantity: 20,
+    bought: false
+  };
+  ShoppingListProvider.defaults.items.push(item);
+  item={
+    name: "Carrots",
     quantity: 10,
     bought: false
   };

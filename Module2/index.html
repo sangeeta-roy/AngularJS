@@ -26,11 +26,11 @@
     </style>
   </head>
   <body>
-    <h1>Shopping List Application</h1>
+    <h1>Shopping List Check off Application</h1>
     <div class="row">
       <!-- To Buy List -->
       <div id ="TBCtrlList" ng-controller='ToBuyController as TBCtrlList'>
-        <h2>To Buy List: </h2>
+        <h2>To Buy: </h2>
        <ol ng-if = "!TBCtrlList.message">
           <li ng-repeat = "item in TBCtrlList.items">
             <span ng-if = "!item.bought">Buy {{item.quantity}} {{item.name}}
@@ -43,7 +43,7 @@
 
       <!-- Already Bought List -->
         <div id = "ABCtrlList" ng-controller='AlreadyBoughtController as ABCtrlList'>
-        <h2>Already bought List: </h2>
+        <h2>Already bought: </h2>
         <ol>
           <li ng-repeat = "item in ABCtrlList.items">
             <span ng-if = "item.bought">Bought {{item.quantity}} {{item.name}}</span>
