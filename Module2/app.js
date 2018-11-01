@@ -7,45 +7,38 @@ angular.module('ShoppingCheck', [])
 .provider('ShoppingList', ShoppingListProvider)
 .config(Config)
 ;
-
+//Config file with default values
 Config.$inject = ['ShoppingListProvider'];
 function Config(ShoppingListProvider) {
-  ShoppingListProvider.defaults.message = false;
   ShoppingListProvider.defaults.items = [];
   var item={
     name: "Cookies",
     quantity: 20,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
   item={
     name: "Carrots",
     quantity: 10,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
   item={
     name: "Broccoli",
     quantity: 2,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
   item={
     name: "Pumpkin",
     quantity: 1,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
   item={
     name: "Eggs",
     quantity: 12,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
   item={
     name: "Chicken",
     quantity: 5,
-    bought: false
   };
   ShoppingListProvider.defaults.items.push(item);
 }
@@ -56,23 +49,11 @@ function ToBuyController(ShoppingList) {
   var TBCtrlList = this;
 
   TBCtrlList.items = ShoppingList.getItems();
-  TBCtrlList.message = ShoppingList.getMessage();
-
-  TBCtrlList.addItem = function () {
-    ShoppingList.addItem(TBCtrlList.itemName, TBCtrlList.itemQuantity);
-  }
 
   TBCtrlList.boughtItem = function (itemIndex) {
   ShoppingList.boughtItem(itemIndex);
+ };
 
- var items = ShoppingList.getItems();
-  for (var i=0; i<items.length; i++) {
-     if( items[i].bought == false)
-     return;
-   }
-     ShoppingList.setMessage(true);
-     TBCtrlList.message = ShoppingList.getMessage();
-};
 }
 
 // LIST #2 - Already bought controller
@@ -86,41 +67,34 @@ ABCtrlList.items = ShoppingList.getAlreadyBoughtItems();
 
 
 // If not specified, maxItems assumed unlimited
+//ShoppingListService
 function ShoppingListService(items, message) {
   var service = this;
 
-  // List of shopping items
+  // array of shopping items
   var items = items;
-  var message = message;
+
   //array of already bought items
   var alreadyBoughtItems = [];
 
-  service.addItem = function (itemName, quantity, bought) {
+  service.addItem = function (itemName, quantity) {
 
       var item = {
         name: itemName,
         quantity: quantity,
-        bought: bought
       };
       items.push(item);
   };
 
   service.boughtItem = function (itemIndex) {
-    items[itemIndex].bought = true;
+
     var item = items[itemIndex];
     alreadyBoughtItems.push(item);
-  };
+    items.splice(itemIndex, 1);
+    };
 
   service.getItems = function () {
     return items;
-  };
-
-  service.getMessage = function () {
-    return message;
-  };
-
-  service.setMessage = function (newmessage) {
-    message = newmessage;
   };
 
   service.getAlreadyBoughtItems = function() {
@@ -136,7 +110,7 @@ function ShoppingListProvider() {
     items: []
 };
 provider.$get = function () {
-  var shoppingList = new ShoppingListService(provider.defaults.items, provider.defaults.message);
+  var shoppingList = new ShoppingListService(provider.defaults.items);
   return shoppingList;
   };
 }

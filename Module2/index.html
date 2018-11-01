@@ -31,14 +31,13 @@
       <!-- To Buy List -->
       <div id ="TBCtrlList" ng-controller='ToBuyController as TBCtrlList'>
         <h2>To Buy: </h2>
-       <ol ng-if = "!TBCtrlList.message">
+       <ol>
           <li ng-repeat = "item in TBCtrlList.items">
-            <span ng-if = "!item.bought">Buy {{item.quantity}} {{item.name}}
+            Buy {{item.quantity}} {{item.name}}
             <button ng-click = "TBCtrlList.boughtItem($index);">Bought</button>
-            </span>
           </li>
         </ol>
-        <div ng-if = "TBCtrlList.message" class="buyemptyMessage">Everything is bought!</div>
+        <div ng-if = "TBCtrlList.items.length == 0" class="buyemptyMessage">Everything is bought!</div>
       </div>
 
       <!-- Already Bought List -->
@@ -46,7 +45,7 @@
         <h2>Already bought: </h2>
         <ol>
           <li ng-repeat = "item in ABCtrlList.items">
-            <span ng-if = "item.bought">Bought {{item.quantity}} {{item.name}}</span>
+            Bought {{item.quantity}} {{item.name}}
           </li>
         </ol>
         <div ng-if = "ABCtrlList.items.length == 0" class="boughtemptyMessage">Nothing bought yet.</div>
