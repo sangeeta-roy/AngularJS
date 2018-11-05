@@ -1,0 +1,16 @@
+<div ng-if="dirlist.isEmpty()">Nothing found</div>
+<table ng-if = "!dirlist.found.length == 0">
+  <thead>
+    <th>menu Item</th>
+    <th>Short Name</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "item in dirlist.found">
+        <td>{{item.name}}</td>
+        <td>{{item.short_name}}</td>
+        <td>{{item.description}}</td>
+        <td><button ng-click="dirlist.onRemove({index: $index});">Don't want this one!</button><td>
+      </tr>
+    </tbody>
+  </table>
